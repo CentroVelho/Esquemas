@@ -32,6 +32,20 @@
         .botao-link:hover { background: #0056b3; transform: scale(1.05); }
         .botao-voltar { background: #6c757d; margin-bottom: 20px; }
 
+        /* Estilo super destacado para os avisos [NOVO] e [Mais fotos] */
+        .tag-destaque {
+            background-color: #ff4757; /* Vermelho chamativo */
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+
         .foto {
             width: 90%;
             max-width: 400px;
@@ -63,32 +77,39 @@
     <script>
         const dados = {
             "Fotos Aleatorias": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
-            "Ligia": ["Fotos/Ligia.jpeg", "Fotos/Ligia2.jpeg"],
+            "Ligia[Mais 1 foto]": ["Fotos/Ligia.jpeg", "Fotos/Ligia2.jpeg", "Fotos/Ligia3.jpeg"],
             "Gabriel": ["Fotos/Capacete.jpeg", "Fotos/Capacete2.jpeg"],
-            "Lia": ["Fotos/Lia.jpeg", "Fotos/Lia2.jpeg","Fotos/Lia3.jpeg", "Fotos/Lia e Melissa.jpeg", "Fotos/Lia4.jpeg"],
+            "Lia[Mais 1 foto]": ["Fotos/Lia.jpeg", "Fotos/Lia2.jpeg","Fotos/Lia3.jpeg", "Fotos/Lia e Melissa.jpeg", "Fotos/Lia4.jpeg", "Fotos/Lia5.jpeg", "Fotos/Lia6.jpeg"],
             "Izake": ["Fotos/Izake.jpeg", "Fotos/Izake2.jpeg", "Fotos/Izake3.jpeg", "Fotos/Izake4.jpeg"],
             "Paulo": ["Fotos/Paulo.jpeg"],
-            "Jasmim": ["Fotos/Jasmim.jpeg", "Fotos/Jasmim2.jpeg", "Fotos/Jasmim3.jpeg", "Fotos/Jasmim4.jpeg"],
+            "Jasmim[Mais 1 foto]": ["Fotos/Jasmim.jpeg", "Fotos/Jasmim2.jpeg", "Fotos/Jasmim3.jpeg", "Fotos/Jasmim4.jpeg", "Fotos/Jasmim5.jpeg"],
             "Lara": ["Fotos/Lara.jpeg", "Fotos/Lara2.jpeg", "Fotos/Lara3.jpeg"],
             "Melissa": ["Fotos/Lia e Melissa.jpeg"],
-            "Juliana": ["Fotos/Juliana.jpeg", "Fotos/Juliana2.jpeg"],
+            "Juliana[Mais 3 fotos]": ["Fotos/Juliana.jpeg", "Fotos/Juliana2.jpeg", "Fotos/Juliana3.jpeg", "Fotos/Juliana4.jpeg", "Fotos/Juliana5.jpeg"],
             "Jupar": ["Fotos/Jupar.jpeg"],
-            "Davi": ["Fotos/Davi.jpeg"]
+            "Davi": ["Fotos/Davi.jpeg"],
+            "Clarisse[NOVO]": ["Fotos/Clarisse.jpeg"],
+            "Carol[NOVO]": ["Fotos/Carol.jpeg"],
+            "Julia[NOVO]": ["Fotos/Julia.jpeg"],
+            "Alexicia[NOVO]": ["Fotos/Alexicia.jpeg"]
         };
 
         const menu = document.getElementById('lista-links');
         const area = document.getElementById('area-fotos');
 
         for (let nome in dados) {
-            menu.innerHTML += `<a class="botao-link item-nome" onclick="mudarTela('${nome}')">${nome}</a>`;
+            // MÁGICA AQUI: Transforma tudo entre [...] em uma etiqueta colorida!
+            let nomeExibicao = nome.replace(/\[(.*?)\]/g, '<span class="tag-destaque">$1</span>');
+
+            menu.innerHTML += `<a class="botao-link item-nome" onclick="mudarTela('${nome}')">${nomeExibicao}</a>`;
 
             let htmlFotos = `<div id="${nome}" class="tela">
                                 <a class="botao-link botao-voltar" onclick="mudarTela('menu')">⬅ Voltar</a>
-                                <h2>Quemas de ${nome}</h2>`;
+                                <h2>Quemas de ${nomeExibicao}</h2>`;
 
             dados[nome].forEach(link => {
                 if(link) {
-                    htmlFotos += `<div class="foto"><img src="${link}" alt="Quemas de ${nome}"></div>`;
+                    htmlFotos += `<div class="foto"><img src="${link}" alt="Quemas"></div>`;
                 }
             });
 
@@ -111,8 +132,9 @@
             let botoes = document.getElementsByClassName('item-nome');
 
             for (let i = 0; i < botoes.length; i++) {
+                // Remove os avisos visualmente só na hora de verificar a pesquisa
                 let texto = botoes[i].textContent || botoes[i].innerText;
-                // A mudança está aqui: startsWith() em vez de indexOf()
+
                 if (texto.toLowerCase().startsWith(input)) {
                     botoes[i].style.display = "inline-block";
                 } else {
