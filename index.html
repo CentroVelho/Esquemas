@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria de Esquemas</title>
+    <title>Galeria de Quemas</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f4f4f9; padding: 20px; text-align: center; }
         .tela { display: none; background: white; max-width: 600px; margin: auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -38,7 +38,7 @@
 <body>
 
     <div id="menu" class="tela tela-ativa">
-        <h1>Galeria de Esquemas</h1>
+        <h1>Galeria de Quemas</h1>
         <p>Escolha uma categoria:</p>
         <div id="lista-links"></div>
     </div>
@@ -53,7 +53,7 @@
             "Lia": ["Fotos/Lia.jpeg", "Fotos/Lia2.jpeg","Fotos/Lia3.jpeg", "Fotos/Lia e Melissa.jpeg", "Fotos/Lia4.jpeg"],
             "Izake": ["Fotos/Izake.jpeg", "Fotos/Izake2.jpeg", "Fotos/Izake3.jpeg"],
             "Paulo": ["Fotos/Paulo.jpeg"],
-            "Esconhecido": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
+            "Desconhecidos": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
             "Jasmim": ["Fotos/Jasmim.jpeg", "Fotos/Jasmim2.jpeg", "Fotos/Jasmim3.jpeg", "Fotos/Jasmim4.jpeg"],
             "Lara": ["Fotos/Lara.jpeg", "Fotos/Lara2.jpeg", "Fotos/Lara3.jpeg"],
             "Melissa": ["Fotos/Lia e Melissa.jpeg"],
@@ -70,11 +70,11 @@
 
             let htmlFotos = `<div id="${nome}" class="tela">
                                 <a class="botao-link botao-voltar" onclick="mudarTela('menu')">⬅ Voltar</a>
-                                <h2>Esquemas de ${nome}</h2>`;
+                                <h2>Quemas de ${nome}</h2>`;
 
             dados[nome].forEach(link => {
                 if(link) { // Só cria o div se tiver link
-                    htmlFotos += `<div class="foto"><img src="${link}" alt="Esquema de ${nome}"></div>`;
+                    htmlFotos += `<div class="foto"><img src="${link}" alt="Quemas de ${nome}"></div>`;
                 }
             });
 
