@@ -11,6 +11,19 @@
 
         h1, h2 { color: #333; }
 
+        #pesquisa {
+            width: 80%;
+            max-width: 400px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 25px;
+            border: 2px solid #007BFF;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        #pesquisa:focus { box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
+
         .botao-link {
             display: inline-block; margin: 10px; padding: 12px 25px;
             background: #007BFF; color: white; border-radius: 25px;
@@ -19,7 +32,6 @@
         .botao-link:hover { background: #0056b3; transform: scale(1.05); }
         .botao-voltar { background: #6c757d; margin-bottom: 20px; }
 
-        /* Ajuste para as fotos ficarem grandes e na vertical */
         .foto {
             width: 90%;
             max-width: 400px;
@@ -39,6 +51,9 @@
 
     <div id="menu" class="tela tela-ativa">
         <h1>Galeria de Quemas</h1>
+
+        <input type="text" id="pesquisa" placeholder="Pesquisar por nome..." onkeyup="filtrarNomes()">
+
         <p>Escolha uma categoria:</p>
         <div id="lista-links"></div>
     </div>
@@ -46,11 +61,10 @@
     <div id="area-fotos"></div>
 
     <script>
-        // --- AQUI VOCÊ ADICIONA AS FOTOS ---
         const dados = {
-            "Desconhecidos": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
+            "Fotos Aleatorias": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
             "Ligia": ["Fotos/Ligia.jpeg", "Fotos/Ligia2.jpeg"],
-            "Capacete": ["Fotos/Capacete.jpeg", "Fotos/Capacete2.jpeg"],
+            "Gabriel": ["Fotos/Capacete.jpeg", "Fotos/Capacete2.jpeg"],
             "Lia": ["Fotos/Lia.jpeg", "Fotos/Lia2.jpeg","Fotos/Lia3.jpeg", "Fotos/Lia e Melissa.jpeg", "Fotos/Lia4.jpeg"],
             "Izake": ["Fotos/Izake.jpeg", "Fotos/Izake2.jpeg", "Fotos/Izake3.jpeg", "Fotos/Izake4.jpeg"],
             "Paulo": ["Fotos/Paulo.jpeg"],
@@ -58,22 +72,22 @@
             "Lara": ["Fotos/Lara.jpeg", "Fotos/Lara2.jpeg", "Fotos/Lara3.jpeg"],
             "Melissa": ["Fotos/Lia e Melissa.jpeg"],
             "Juliana": ["Fotos/Juliana.jpeg", "Fotos/Juliana2.jpeg"],
-            "Jupar": ["Fotos/Jupar.jpeg"]
+            "Jupar": ["Fotos/Jupar.jpeg"],
+            "Davi": ["Fotos/Davi.jpeg"]
         };
-        // ------------------------------------
 
         const menu = document.getElementById('lista-links');
         const area = document.getElementById('area-fotos');
 
         for (let nome in dados) {
-            menu.innerHTML += `<a class="botao-link" onclick="mudarTela('${nome}')">${nome}</a>`;
+            menu.innerHTML += `<a class="botao-link item-nome" onclick="mudarTela('${nome}')">${nome}</a>`;
 
             let htmlFotos = `<div id="${nome}" class="tela">
                                 <a class="botao-link botao-voltar" onclick="mudarTela('menu')">⬅ Voltar</a>
                                 <h2>Quemas de ${nome}</h2>`;
 
             dados[nome].forEach(link => {
-                if(link) { // Só cria o div se tiver link
+                if(link) {
                     htmlFotos += `<div class="foto"><img src="${link}" alt="Quemas de ${nome}"></div>`;
                 }
             });
@@ -85,6 +99,26 @@
         function mudarTela(id) {
             document.querySelectorAll('.tela').forEach(t => t.classList.remove('tela-ativa'));
             document.getElementById(id).classList.add('tela-ativa');
+
+            if(id === 'menu') {
+                document.getElementById('pesquisa').value = '';
+                filtrarNomes();
+            }
+        }
+
+        function filtrarNomes() {
+            let input = document.getElementById('pesquisa').value.toLowerCase();
+            let botoes = document.getElementsByClassName('item-nome');
+
+            for (let i = 0; i < botoes.length; i++) {
+                let texto = botoes[i].textContent || botoes[i].innerText;
+                // A mudança está aqui: startsWith() em vez de indexOf()
+                if (texto.toLowerCase().startsWith(input)) {
+                    botoes[i].style.display = "inline-block";
+                } else {
+                    botoes[i].style.display = "none";
+                }
+            }
         }
     </script>
 </body>
