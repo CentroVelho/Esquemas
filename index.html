@@ -9,7 +9,7 @@
         body { font-family: 'Poppins', 'Segoe UI', sans-serif; background: var(--fundo); color: var(--texto); margin: 0; padding: 0; text-align: center; overflow-x: hidden; }
 
         .patrocinadores { background: #111; padding: 10px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--cor-principal); }
-        .patrocinadores img { height: 40px; margin: 0 30px; filter: grayscale(100%); transition: 0.3s; }
+        .patrocinadores img { height: 40px; margin: 0 30px; filter: grayscale(100%); transition: 0.3s; vertical-align: middle; }
         .patrocinadores img:hover { filter: grayscale(0%); transform: scale(1.1); }
 
         .container { max-width: 800px; margin: 20px auto; padding: 20px; }
@@ -45,7 +45,6 @@
         .girando { animation: tremer 0.1s infinite; border-color: var(--cor-secundaria) !important; box-shadow: 0 0 20px var(--cor-secundaria) !important; }
         @keyframes tremer { 0% { transform: translate(1px, 1px) rotate(0deg); } 50% { transform: translate(-1px, -2px) rotate(-1deg); } 100% { transform: translate(-2px, 1px) rotate(1deg); } }
 
-        /* AJUSTES PARA CELULAR */
         @media (max-width: 600px) {
             .container { padding: 10px; }
             .tela { padding: 15px; }
@@ -53,14 +52,10 @@
             #pesquisa { width: 95%; padding: 12px; }
             .botoes-menu { flex-direction: column; width: 100%; }
             .botao { width: 100%; box-sizing: border-box; }
-
-            /* Jogo na Horizontal (Lado a Lado) */
             .jogo-casal { flex-direction: row; gap: 10px; flex-wrap: nowrap; }
-            .slot { width: 120px; height: 160px; } /* Fotos menores para caberem */
+            .slot { width: 120px; height: 160px; }
             .slot span { font-size: 12px; }
             .sinal-mais { font-size: 30px; margin: 0 5px; }
-
-            /* Ajuste da galeria */
             .foto-card { width: 140px; height: 180px; }
         }
     </style>
@@ -73,17 +68,20 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="Apple">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" alt="Coca-Cola">
+        </marquee>
+    </div>
         </marquee>
     </div>
 
     <div class="container">
         <div id="menu" class="tela tela-ativa">
             <h1>🔥 Galeria VIP 🔥</h1>
-
             <div class="botoes-menu">
                 <button class="botao botao-jogo" onclick="mudarTela('tela-jogos')">🎮 Área de Jogos</button>
             </div>
-
             <input type="text" id="pesquisa" placeholder="Pesquisar por nome..." onkeyup="filtrarNomes()">
             <div id="lista-links" class="grade-fotos"></div>
         </div>
@@ -91,20 +89,11 @@
         <div id="tela-jogos" class="tela">
             <a class="botao botao-voltar" onclick="mudarTela('menu')">⬅ Voltar</a>
             <h1>💖 Quem será o Casal? 💖</h1>
-            <p>Clique no botão para girar a roleta!</p>
-
             <div class="jogo-casal">
-                <div class="slot" id="slot1">
-                    <span>[Sem foto]</span>
-                    <img id="img-slot1" src="" alt="Pessoa 1">
-                </div>
+                <div class="slot" id="slot1"><span>[Sem foto]</span><img id="img-slot1" src="" alt="Pessoa 1"></div>
                 <div class="sinal-mais">❤</div>
-                <div class="slot" id="slot2">
-                    <span>[Sem foto]</span>
-                    <img id="img-slot2" src="" alt="Pessoa 2">
-                </div>
+                <div class="slot" id="slot2"><span>[Sem foto]</span><img id="img-slot2" src="" alt="Pessoa 2"></div>
             </div>
-
             <button class="botao botao-jogo" id="btn-girar" onclick="girarCasal()" style="font-size: 18px; padding: 15px; width: 100%;">GIRAR ROLETA 🎲</button>
         </div>
 
@@ -114,7 +103,7 @@
     <script>
         const dados = {
             "Fotos Aleatorias": ["Fotos/Desconhecido.jpeg", "Fotos/Desconhecido2.jpeg", "Fotos/Desconhecido3.jpeg", "Fotos/Desconhecido4.jpeg", "Fotos/Desconhecido5.jpeg", "Fotos/Desconhecido6.jpeg", "Fotos/Desconhecido7.jpeg", "Fotos/Desconhecido8.jpeg", "Fotos/Desconhecido9.jpeg"],
-            "Ligia[Mais 3 fotos]": ["Fotos/Ligia.jpeg", "Fotos/Ligia2.jpeg", "Fotos/Ligia3.jpeg", "Fotos/Ligia4.jpeg", "Fotos/Ligia5.jpeg"],
+            "Ligia[Mais 1 foto]": ["Fotos/Ligia.jpeg", "Fotos/Ligia2.jpeg", "Fotos/Ligia3.jpeg"],
             "Gabriel": ["Fotos/Capacete.jpeg", "Fotos/Capacete2.jpeg"],
             "Lia[Mais 1 foto]": ["Fotos/Lia.jpeg", "Fotos/Lia2.jpeg","Fotos/Lia3.jpeg", "Fotos/Lia e Melissa.jpeg", "Fotos/Lia4.jpeg", "Fotos/Lia5.jpeg", "Fotos/Lia6.jpeg"],
             "Izake": ["Fotos/Izake.jpeg", "Fotos/Izake2.jpeg", "Fotos/Izake3.jpeg", "Fotos/Izake4.jpeg"],
@@ -135,24 +124,16 @@
 
         const menu = document.getElementById('lista-links');
         const area = document.getElementById('area-fotos');
-        let todasAsFotos = [];
 
         for (let nome in dados) {
-            dados[nome].forEach(link => { if(link) todasAsFotos.push(link); });
             let nomeExibicao = nome.replace(/\[(.*?)\]/g, '<span class="tag-destaque">$1</span>');
             let idNome = nome.replace(/[^a-zA-Z0-9]/g, "");
-
             menu.innerHTML += `<a class="botao item-nome" style="margin: 5px; width: auto;" onclick="mudarTela('${idNome}')">${nomeExibicao}</a>`;
-
             let htmlFotos = `<div id="${idNome}" class="tela">
                                 <a class="botao botao-voltar" onclick="mudarTela('menu')">⬅ Voltar</a>
                                 <h2>Álbum de ${nomeExibicao}</h2>
                                 <div class="grade-fotos">`;
-
-            dados[nome].forEach(link => {
-                if(link) { htmlFotos += `<div class="foto-card"><img src="${link}" onerror="this.src='https://via.placeholder.com/200x250?text=Sem+Foto'"></div>`; }
-            });
-
+            dados[nome].forEach(link => { htmlFotos += `<div class="foto-card"><img src="${link}" onerror="this.src='https://via.placeholder.com/200x250?text=Sem+Foto'"></div>`; });
             htmlFotos += `</div></div>`;
             area.innerHTML += htmlFotos;
         }
@@ -160,58 +141,46 @@
         function mudarTela(id) {
             document.querySelectorAll('.tela').forEach(t => t.classList.remove('tela-ativa'));
             document.getElementById(id).classList.add('tela-ativa');
-            if(id === 'menu') {
-                document.getElementById('pesquisa').value = '';
-                filtrarNomes();
-            }
+            if(id === 'menu') { document.getElementById('pesquisa').value = ''; filtrarNomes(); }
         }
 
         function filtrarNomes() {
             let input = document.getElementById('pesquisa').value.toLowerCase();
-            let botoes = document.getElementsByClassName('item-nome');
-            for (let i = 0; i < botoes.length; i++) {
-                let texto = botoes[i].textContent || botoes[i].innerText;
-                botoes[i].style.display = texto.toLowerCase().includes(input) ? "inline-block" : "none";
-            }
+            document.querySelectorAll('.item-nome').forEach(el => {
+                el.style.display = (el.textContent.toLowerCase().includes(input)) ? "inline-block" : "none";
+            });
         }
 
         let girando = false;
         function girarCasal() {
-            if (girando || todasAsFotos.length < 2) return;
+            if (girando) return;
+            const chaves = Object.keys(dados);
+            if (chaves.length < 2) return;
+
             girando = true;
             document.getElementById('btn-girar').innerText = "GIRANDO... ⏳";
 
-            const slot1 = document.getElementById('slot1');
-            const slot2 = document.getElementById('slot2');
             const img1 = document.getElementById('img-slot1');
             const img2 = document.getElementById('img-slot2');
+            img1.src = "https://via.placeholder.com/200x250?text=Girando";
+            img2.src = "https://via.placeholder.com/200x250?text=Girando";
 
-            img1.src = todasAsFotos[Math.floor(Math.random() * todasAsFotos.length)];
-            img2.src = todasAsFotos[Math.floor(Math.random() * todasAsFotos.length)];
+            document.getElementById('slot1').querySelector('span').style.display = 'none';
+            document.getElementById('slot2').querySelector('span').style.display = 'none';
+            img1.style.display = 'block'; img2.style.display = 'block';
 
-            slot1.querySelector('span').style.display = 'none';
-            slot2.querySelector('span').style.display = 'none';
-            img1.style.display = 'block';
-            img2.style.display = 'block';
+            document.getElementById('slot1').classList.add('girando');
+            document.getElementById('slot2').classList.add('girando');
 
-            slot1.classList.add('girando');
-            slot2.classList.add('girando');
+            let chave1 = chaves[Math.floor(Math.random() * chaves.length)];
+            let chave2;
+            do { chave2 = chaves[Math.floor(Math.random() * chaves.length)]; } while (chave1 === chave2);
 
-            let intervaloRoleta = setInterval(() => {
-                img1.src = todasAsFotos[Math.floor(Math.random() * todasAsFotos.length)] || "https://via.placeholder.com/200x250";
-                img2.src = todasAsFotos[Math.floor(Math.random() * todasAsFotos.length)] || "https://via.placeholder.com/200x250";
-            }, 100);
+            let intervalo1 = setInterval(() => { img1.src = dados[chaves[Math.floor(Math.random() * chaves.length)]][0]; }, 100);
+            let intervalo2 = setInterval(() => { img2.src = dados[chaves[Math.floor(Math.random() * chaves.length)]][0]; }, 100);
 
-            setTimeout(() => {
-                slot1.classList.remove('girando');
-            }, 2000);
-
-            setTimeout(() => {
-                clearInterval(intervaloRoleta);
-                slot2.classList.remove('girando');
-                document.getElementById('btn-girar').innerText = "NOVO CASAL? GIRAR! 🎲";
-                girando = false;
-            }, 3500);
+            setTimeout(() => { clearInterval(intervalo1); img1.src = dados[chave1][Math.floor(Math.random() * dados[chave1].length)]; document.getElementById('slot1').classList.remove('girando'); }, 2000);
+            setTimeout(() => { clearInterval(intervalo2); img2.src = dados[chave2][Math.floor(Math.random() * dados[chave2].length)]; document.getElementById('slot2').classList.remove('girando'); document.getElementById('btn-girar').innerText = "NOVO CASAL? GIRAR! 🎲"; girando = false; }, 4000);
         }
     </script>
 </body>
